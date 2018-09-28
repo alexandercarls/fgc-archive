@@ -5,7 +5,7 @@ Consists of the old Node.JS TypeScript Backend and old README snippets:
 - Models
 - Worker Process for sending mails (via Redis)
 
-Other snapshots of dependencies like `db` and `docker-compose`-files have been added to start the process.
+Other snapshots of dependencies like `db` and `docker-compose`-files have been added to allow starting the processes.
 
 ## Run tests
 Runs linting, test for models, api and worker layer in `node-multi`
