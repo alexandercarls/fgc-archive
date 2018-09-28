@@ -1,0 +1,3 @@
+CREATE DATABASE fgc_prod;
+CREATE DATABASE fgc_dev;
+CREATE DATABASE fgc_test;

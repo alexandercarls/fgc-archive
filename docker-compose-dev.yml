@@ -1,0 +1,42 @@
+version: "3.3"
+services:
+  fgc-db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_USER=fgc
+      - POSTGRES_PASSWORD=12345
+    ports:
+      - "5432:5432"
+  pgweb:
+    image: sosedoff/pgweb
+    environment:
+      DATABASE_URL: postgres://fgc:12345@fgc-db:5432/fgc_dev?sslmode=disable
+     # `pgweb` fails for the first time,
+     # since it will not wait for the postgres instance to be up
+     # and healthy, this ensures a restart
+    restart: always
+    ports:
+      - "8081:8081"
+    links:
+      - fgc-db
+    depends_on:
+      - fgc-db
+  queue:
+    image: redis:4.0.9-alpine
+    ports:
+      - "6379:6379"
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    ports:
+      - "8025:8025"
+      - "587:1025"
+  # e2e:
+  #   build:
+  #     context: ./e2e
+  #   depends_on:
+  #     - client
+  #     - worker
+  #     - api
+  #   network_mode: 'host'

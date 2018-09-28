@@ -1,0 +1,8 @@
+FROM node:9.11.1-alpine
+WORKDIR /usr/app
+COPY package.json yarn.lock ./
+RUN yarn
+COPY . .
+USER node
+EXPOSE 8000
+CMD ["npm", "run", "dev"]

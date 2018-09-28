@@ -1,0 +1,14 @@
+FROM node:9.11.1-alpine
+WORKDIR /usr/app
+COPY package.json yarn.lock ./
+RUN yarn
+COPY . .
+RUN npm run build-ts
+RUN yarn --prod # removes dev dependencies
+
+FROM node:9.11.1-alpine
+WORKDIR /usr/app
+COPY --from=0 /usr/app/node_modules ./node_modules
+COPY --from=0 /usr/app/dist ./dist
+EXPOSE 8000
+CMD ["node", "./dist/index.js"]
