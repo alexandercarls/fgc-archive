@@ -1,6 +1,6 @@
 # FGC-Archive
 
-Consists of the old Node.JS TypeScript Backend and old README snippets:
+Consists of the old Node.js TypeScript Backend and old README snippets:
 - Koa Web API
 - Models
 - Worker Process for sending mails (via Redis)
